@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum GameType {
+  ANSWER_SMASH
+  RHYME_TIME
+  ANSWERS_IN_QUESTION
+  BACKWARDS_ROUND
+  SORRY_WRONG_NUMBER
+  WELL_DONE_IF_YOU_SAID
+  INTERNET_HISTORY
+  POP_ART
+  CAN_YOU_FEEL_IT
+  BROKEN_KARAOKE
+  SIZE_MATTERS
+  THE_NICE_ROUND
+  THE_RICH_LIST
+  BUILD_YOUR_OWN
+  CORRECTION_CENTRE
+  DIM_SUMS
+  DISTINCTLY_AVERAGE
+  WHERE_IS_KAZAKHSTAN
+  PUT_FINGER_ON_IT
+  IS_IT_ME
+  CINE_NYMS
+  AND_ANSWER_ISNT
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Game {
+  id          String    @id @default(cuid())
+  name        String
+  type        GameType
+  description String?
+  rules       String?
+  round       Int?      // Which round this game is typically played in (1-5)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  questions   Question[]
+  
+  @@map("games")
+}
+
+model Question {
+  id          String     @id @default(cuid())
+  gameId      String
+  content     String     // Main question/prompt
+  answer      String     // Correct answer
+  hints       String?    // JSON array of hints
+  explanation String?    // Why this is the answer
+  difficulty  Difficulty @default(MEDIUM)
+  category    String?    // e.g., "Geography", "Movies", "History"
+  points      Int        @default(1)
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  
+  // For specific game types that need extra data
+  imageUrl    String?    // For visual questions (Pop Art, etc)
+  audioUrl    String?    // For audio-based questions
+  metadata    String?    // JSON field for game-specific data
+  
+  game        Game       @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  
+  @@map("questions")
+}
+
+model QuizSession {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  
+  questions   SessionQuestion[]
+  
+  @@map("quiz_sessions")
+}
+
+model SessionQuestion {
+  id            String      @id @default(cuid())
+  sessionId     String
+  questionId    String
+  order         Int         // Order of question in session
+  pointsAwarded Int?        // Points awarded for this question
+  timeLimit     Int?        // Time limit in seconds
+  
+  session       QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  @@map("session_questions")
+  @@unique([sessionId, order])
+}
