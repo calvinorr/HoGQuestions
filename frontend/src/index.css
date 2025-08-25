@@ -521,6 +521,11 @@
     border-radius: 12px;
     padding: 1rem;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 1rem; /* Add explicit margin for spacing */
+  }
+
+  .stat-tile:last-child {
+    margin-bottom: 0; /* Remove margin from last tile */
   }
 
   .stat-tile:hover {
