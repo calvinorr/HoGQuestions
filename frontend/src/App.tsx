@@ -47,6 +47,7 @@ function Home() {
       </div>
 
         {/* Beautiful Stat Cards */}
+        <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
         <Card className="card-gradient-blue hover-lift hover-glow group">
           <CardContent className="p-8">
