@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Game } from '../types';
 import GameList from './GameList';
 import GameForm from './GameForm';
+import Container from '@/components/ui/container';
 
 type View = 'list' | 'add' | 'edit';
 
@@ -34,7 +35,7 @@ export default function Games() {
   };
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
+    <Container maxWidth="5xl" className="py-8">
       <div className="space-y-8">
         {/* Page Header */}
         <div className="flex items-center justify-between">
@@ -62,6 +63,6 @@ export default function Games() {
           />
         )}
       </div>
-    </div>
+    </Container>
   );
 }

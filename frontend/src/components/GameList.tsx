@@ -98,7 +98,7 @@ export default function GameList({ onEdit, onDelete, onAdd }: GameListProps) {
   }
 
   return (
-    <Card className="border-0 shadow-sm">
+    <Card compact className="border-0 shadow-sm">
       <CardHeader className="pb-4">
         <div className="flex justify-between items-center">
           <div className="space-y-1">
@@ -138,11 +138,11 @@ export default function GameList({ onEdit, onDelete, onAdd }: GameListProps) {
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
-                  <TableHead className="font-semibold">Name</TableHead>
-                  <TableHead className="font-semibold">Type</TableHead>
-                  <TableHead className="font-semibold">Round</TableHead>
-                  <TableHead className="font-semibold">Status</TableHead>
-                  <TableHead className="font-semibold">Questions</TableHead>
+                  <TableHead className="font-semibold w-[30%]">Name</TableHead>
+                  <TableHead className="font-semibold w-[20%]">Type</TableHead>
+                  <TableHead className="font-semibold w-[10%]">Round</TableHead>
+                  <TableHead className="font-semibold w-[12%]">Status</TableHead>
+                  <TableHead className="font-semibold w-[12%]">Questions</TableHead>
                   <TableHead className="font-semibold w-[120px]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
