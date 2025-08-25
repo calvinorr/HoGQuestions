@@ -497,6 +497,11 @@
   .glass-card {
     border-radius: 1rem;
     padding: 1.25rem; /* 20px */
+    margin-bottom: 1rem; /* Add margin between cards */
+  }
+
+  .glass-card:last-child {
+    margin-bottom: 0; /* Remove margin from last card */
   }
 
   /* CTA button more pill-like and prominent */
