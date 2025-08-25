@@ -268,11 +268,11 @@
   .animate-fade-up {
     animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   @keyframes fadeUp {
     from {
       opacity: 0;
@@ -283,29 +283,111 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  
+
   /* Interactive hover effects */
   .hover-lift {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px color-mix(in srgb, black 10%, transparent 90%);
   }
-  
+
   .hover-glow {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .hover-glow:hover {
-    box-shadow: 
+    box-shadow:
       0 25px 50px -12px rgba(59, 130, 246, 0.3),
       0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+  }
+
+  /* Dashboard-specific layout utilities */
+  .dashboard-grid {
+    display: grid;
+    gap: 1.5rem; /* 24px */
+    align-items: start;
+    grid-template-columns: minmax(220px, 260px) 1fr minmax(260px, 320px);
+  }
+
+  /* Make left column sticky under the nav for easier scanning */
+  .dashboard-left {
+    position: sticky;
+    top: 5.5rem; /* accounts for nav height + some offset */
+    align-self: start;
+  }
+
+  /* Wider glass cards and softer radii for dashboard */
+  .glass-card {
+    border-radius: 1rem;
+    padding: 1.25rem; /* 20px */
+  }
+
+  /* CTA button more pill-like and prominent */
+  .btn-primary {
+    border-radius: 9999px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+    font-weight: 600;
+    box-shadow: 0 14px 30px -10px rgba(59, 130, 246, 0.35);
+    background: linear-gradient(90deg, #7c4dff 0%, #40e0ff 100%);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 35px -12px rgba(59, 130, 246, 0.4);
+  }
+
+  /* Constrain stat tiles to have stronger separation and large numbers */
+  .stat-tile {
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .stat-number {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* Responsive behaviors */
+  @media (max-width: 1280px) {
+    .dashboard-grid {
+      grid-template-columns: minmax(200px, 240px) 1fr;
+    }
+
+    .dashboard-grid > :nth-child(3) {
+      /* move right panel below center at narrower widths */
+      grid-column: 1 / -1;
+    }
+
+    .dashboard-left {
+      top: 6.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-left,
+    .dashboard-right {
+      position: static;
+    }
+
+    .btn-primary {
+      width: 100%;
+      border-radius: 12px;
+    }
   }
 }
