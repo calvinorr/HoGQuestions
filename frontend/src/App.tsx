@@ -24,6 +24,15 @@ function AppLayout() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800">
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="skip-link enhanced-focus"
+        aria-label="Skip to main content"
+      >
+        Skip to main content
+      </a>
+
       {/* Top navigation */}
       <nav className="sticky top-0 z-50 w-full nav-glass" aria-label="Main navigation">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6">
@@ -41,22 +50,22 @@ function AppLayout() {
             {/* Primary Links (always visible) */}
             <div className="flex items-center gap-4 flex-wrap" role="navigation" aria-label="Primary">
               <nav className="flex items-center gap-2 flex-wrap">
-                <Link to="/" className="nav-item inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
+                <Link to="/" className="nav-item enhanced-focus inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
                   <BarChart3 className="h-5 w-5 text-slate-200" />
                   <span className="nav-label">Dashboard</span>
                 </Link>
 
-                <Link to="/games" className="nav-item inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
+                <Link to="/games" className="nav-item enhanced-focus inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
                   <GamepadIcon className="h-5 w-5 text-slate-200" />
                   <span className="nav-label">Games</span>
                 </Link>
 
-                <Link to="/questions" className="nav-item inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
+                <Link to="/questions" className="nav-item enhanced-focus inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
                   <HelpCircle className="h-5 w-5 text-slate-200" />
                   <span className="nav-label">Questions</span>
                 </Link>
 
-                <Link to="/players" className="nav-item inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
+                <Link to="/players" className="nav-item enhanced-focus inline-flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800/50">
                   <Users className="h-5 w-5 text-slate-200" />
                   <span className="nav-label">Players</span>
                 </Link>
@@ -84,7 +93,11 @@ function AppLayout() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main
+        id="main-content"
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        tabIndex={-1}
+      >
         <Outlet />
       </main>
     </div>

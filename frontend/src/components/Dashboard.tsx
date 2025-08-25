@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '@/components/ui/container';
 import { GamepadIcon } from 'lucide-react';
+import LoadingSpinner from './LoadingSpinner';
+import SkeletonLoader from './SkeletonLoader';
 
 /**
  * Dashboard component composed of three columns:
@@ -13,32 +15,64 @@ import { GamepadIcon } from 'lucide-react';
  */
 
 function LeftStats() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <aside className="space-y-6">
       <div className="rounded-2xl overflow-hidden glass-card p-4">
         <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
 
-        <div className="space-y-4">
-          <div className="rounded-xl p-4 card-gradient-blue stat-tile">
-            <p className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Total Games</p>
-            <p className="stat-number text-3xl font-extrabold text-blue-100">22</p>
+        {isLoading ? (
+          <div className="space-y-4">
+            <div className="rounded-xl p-4 card-gradient-blue">
+              <div className="skeleton-text mb-2" />
+              <div className="skeleton-stat" />
+            </div>
+            <div className="rounded-xl p-4 card-gradient-green">
+              <div className="skeleton-text mb-2" />
+              <div className="skeleton-stat" />
+            </div>
+            <div className="rounded-xl p-4 card-gradient-purple">
+              <div className="skeleton-text mb-2" />
+              <div className="skeleton-stat" />
+            </div>
+            <div className="rounded-xl p-4 card-gradient-orange">
+              <div className="skeleton-text mb-2" />
+              <div className="skeleton-stat" />
+            </div>
           </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="rounded-xl p-4 card-gradient-blue stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Total Games</p>
+              <p className="stat-number text-3xl font-extrabold text-blue-100">22</p>
+            </div>
 
-          <div className="rounded-xl p-4 card-gradient-green stat-tile">
-            <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-2">Questions</p>
-            <p className="stat-number text-3xl font-extrabold text-emerald-100">156</p>
-          </div>
+            <div className="rounded-xl p-4 card-gradient-green stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-2">Questions</p>
+              <p className="stat-number text-3xl font-extrabold text-emerald-100">156</p>
+            </div>
 
-          <div className="rounded-xl p-4 card-gradient-purple stat-tile">
-            <p className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-2">Quiz Sessions</p>
-            <p className="stat-number text-3xl font-extrabold text-purple-100">12</p>
-          </div>
+            <div className="rounded-xl p-4 card-gradient-purple stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-2">Quiz Sessions</p>
+              <p className="stat-number text-3xl font-extrabold text-purple-100">12</p>
+            </div>
 
-          <div className="rounded-xl p-4 card-gradient-orange stat-tile">
-            <p className="text-xs font-semibold text-orange-300 uppercase tracking-wider mb-2">Active Players</p>
-            <p className="stat-number text-3xl font-extrabold text-orange-100">48</p>
+            <div className="rounded-xl p-4 card-gradient-orange stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-orange-300 uppercase tracking-wider mb-2">Active Players</p>
+              <p className="stat-number text-3xl font-extrabold text-orange-100">48</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="rounded-2xl glass-card p-4">
@@ -49,39 +83,58 @@ function LeftStats() {
 }
 
 function CenterPanel() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section>
       <div className="mb-6">
-        <div
-          className="relative overflow-hidden rounded-3xl p-8 sm:p-10 lg:p-12 border"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(147, 51, 234, 0.06) 50%, rgba(99, 102, 241, 0.10) 100%)',
-            backdropFilter: 'blur(10px)',
-            borderColor: 'rgba(148, 163, 184, 0.08)',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          }}
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div
-              className="h-16 w-16 rounded-2xl flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%)',
-                boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.4)',
-              }}
-            >
-              <GamepadIcon className="h-8 w-8 text-white" />
-            </div>
-            <div className="flex-1">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-1 heading-gradient">House of Games</h1>
-              <p className="text-sm text-foreground/70">Access professional-grade administrative functions designed for seamless quiz management</p>
-            </div>
+        {isLoading ? (
+          <div className="relative overflow-hidden rounded-3xl p-8 sm:p-10 lg:p-12 border">
+            <div className="skeleton-title" />
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
           </div>
+        ) : (
+          <div
+            className="relative overflow-hidden rounded-3xl p-8 sm:p-10 lg:p-12 border enhanced-focus"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(147, 51, 234, 0.06) 50%, rgba(99, 102, 241, 0.10) 100%)',
+              backdropFilter: 'blur(10px)',
+              borderColor: 'rgba(148, 163, 184, 0.08)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div
+                className="h-16 w-16 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%)',
+                  boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.4)',
+                }}
+              >
+                <GamepadIcon className="h-8 w-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-1 heading-gradient">House of Games</h1>
+                <p className="text-sm text-foreground/70">Access professional-grade administrative functions designed for seamless quiz management</p>
+              </div>
+            </div>
 
-          <p className="text-base text-foreground/70 max-w-3xl leading-relaxed">
-            Configure and manage game formats, assemble quiz sessions, and preview player activity — all from a single admin interface.
-          </p>
-        </div>
+            <p className="text-base text-foreground/70 max-w-3xl leading-relaxed">
+              Configure and manage game formats, assemble quiz sessions, and preview player activity — all from a single admin interface.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="space-y-6">
@@ -128,32 +181,66 @@ function CenterPanel() {
 }
 
 function RightPanel() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <aside className="space-y-6">
       <div className="glass-card rounded-2xl p-4">
         <h4 className="font-semibold mb-3">Activity</h4>
-        <ul className="text-foreground/70 list-disc pl-4 space-y-2">
-          <li>New question added: Rhyme Time — <span className="text-foreground">Rhyme Round</span></li>
-          <li>Player joined: 7 new</li>
-          <li>Session scheduled: Quiz Night — 19:00</li>
-        </ul>
+        {isLoading ? (
+          <div className="space-y-2">
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
+          </div>
+        ) : (
+          <ul className="text-foreground/70 list-disc pl-4 space-y-2">
+            <li>New question added: Rhyme Time — <span className="text-foreground">Rhyme Round</span></li>
+            <li>Player joined: 7 new</li>
+            <li>Session scheduled: Quiz Night — 19:00</li>
+          </ul>
+        )}
       </div>
 
       <div className="glass-card rounded-2xl p-4">
         <h5 className="font-semibold mb-2">Recent Sessions</h5>
-        <div className="rounded-md bg-slate-800/40 p-3">
-          <div className="text-sm">12 Aug · Pub Quiz</div>
-          <div className="text-sm text-foreground/60 mt-2">11 Aug · Kids Special</div>
-        </div>
+        {isLoading ? (
+          <div className="space-y-2">
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
+          </div>
+        ) : (
+          <div className="rounded-md bg-slate-800/40 p-3">
+            <div className="text-sm">12 Aug · Pub Quiz</div>
+            <div className="text-sm text-foreground/60 mt-2">11 Aug · Kids Special</div>
+          </div>
+        )}
       </div>
 
       <div className="glass-card rounded-2xl p-4">
         <h5 className="font-semibold mb-2">Shortcuts</h5>
-        <ul className="text-foreground/70 space-y-1">
-          <li className="text-blue-300">+ Create Session</li>
-          <li className="text-blue-300">+ Add Question</li>
-          <li className="text-blue-300">Player Inbox</li>
-        </ul>
+        {isLoading ? (
+          <div className="space-y-2">
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
+            <div className="skeleton-text" />
+          </div>
+        ) : (
+          <ul className="text-foreground/70 space-y-1">
+            <li className="text-blue-300 enhanced-focus">+ Create Session</li>
+            <li className="text-blue-300 enhanced-focus">+ Add Question</li>
+            <li className="text-blue-300 enhanced-focus">Player Inbox</li>
+          </ul>
+        )}
       </div>
     </aside>
   );

@@ -110,6 +110,16 @@
     --ring: 221 83% 53%;
   }
 
+  /* Loading skeleton animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
   * {
     border-color: hsl(var(--border));
   }
@@ -408,6 +418,66 @@
       0 0 0 1px rgba(59, 130, 246, 0.2) inset;
   }
 
+  /* Skeleton loading utility */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(30, 41, 59, 0.5) 0%,
+      rgba(51, 65, 85, 0.5) 50%,
+      rgba(30, 41, 59, 0.5) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .skeleton-text {
+    height: 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  .skeleton-title {
+    height: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: 60%;
+  }
+
+  .skeleton-stat {
+    height: 3rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  /* Enhanced focus indicators */
+  .enhanced-focus {
+    position: relative;
+  }
+
+  .enhanced-focus:focus,
+  .enhanced-focus:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+  }
+
+  /* Skip to content link for accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 8px 0;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
   /* Dashboard-specific layout utilities */
   .dashboard-grid {
     display: grid;
@@ -450,12 +520,30 @@
   .stat-tile {
     border-radius: 12px;
     padding: 1rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stat-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.3);
   }
 
   .stat-number {
     font-size: 2.25rem;
     font-weight: 800;
     line-height: 1;
+  }
+
+  /* Enhanced card hover effects */
+  .glass-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(51, 65, 85, 0.2) inset;
   }
 
   /* Responsive behaviors */
