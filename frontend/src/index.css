@@ -204,9 +204,108 @@
   /* Modern navigation glass effect */
   .nav-glass {
     backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(15, 23, 42, 0.85);
-    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    background: rgba(10, 14, 25, 0.94);
+    border-bottom: 1px solid rgba(51, 65, 85, 0.55);
+    box-shadow: 0 6px 18px -8px rgba(2,6,23,0.6);
+    color: hsl(var(--foreground));
+  }
+
+  /* Professional nav item styles: spacing, alignment, hover, focus */
+  .nav-glass .nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    color: hsl(var(--foreground)) !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 160ms ease, transform 120ms ease;
+  }
+
+  .nav-glass .nav-item svg {
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: hsl(var(--foreground)) !important;
+    opacity: 0.95;
+    vertical-align: middle;
+  }
+
+  .nav-glass .nav-label {
+    display: inline-block;
+    margin-left: 0;
+    color: hsl(var(--foreground)) !important;
+    line-height: 1;
+  }
+
+  .nav-glass .nav-item:hover {
+    background: rgba(255,255,255,0.025);
+    transform: translateY(-1px);
+  }
+
+  .nav-glass .nav-item:active {
+    transform: translateY(0);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .nav-glass .nav-item:focus,
+  .nav-glass .nav-item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+  }
+
+  /* Slight separators to keep nav visually balanced */
+  .nav-glass .nav-left,
+  .nav-glass .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Reduce the emphasis of the brand gradient inside the nav so it doesn't steal contrast */
+  .nav-glass .brand-gradient {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    color: hsl(var(--foreground)) !important;
+    font-weight: 700;
+  }
+
+  /* Ensure links and controls inside the nav follow the dashboard palette and are readable */
+  .nav-glass a,
+  .nav-glass .button,
+  .nav-glass input,
+  .nav-glass button {
+    color: hsl(var(--foreground));
+  }
+
+  .nav-glass a {
+    text-decoration: none;
+  }
+
+  /* Mobile overlay / aside adjustments to avoid stacking and legibility issues */
+  .mobile-overlay {
+    z-index: 60;
+  }
+
+  .mobile-aside {
+    background: rgba(15, 23, 42, 0.96);
+    color: hsl(var(--foreground));
+    border-left: 1px solid rgba(51, 65, 85, 0.35);
+    min-width: 18rem;
+  }
+
+  .mobile-aside a {
+    color: #e6eefb;
+    text-decoration: none;
+  }
+
+  .mobile-close-btn {
+    background: rgba(255,255,255,0.95);
+    color: #0b1220;
+    border-radius: 6px;
+    padding: 0.25rem;
+    line-height: 1;
   }
   
   /* Professional gradient text */

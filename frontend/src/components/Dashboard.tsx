@@ -109,13 +109,17 @@ function CenterPanel() {
           <div className="glass-card rounded-2xl p-6">
             <h4 className="text-lg font-semibold mb-2">Question Library</h4>
             <p className="text-foreground/60 mb-4">Create, edit, and organize questions for each game type.</p>
-            <button className="w-full bg-gray-600/50 text-gray-300 py-3 text-base cursor-not-allowed" disabled>Manage Questions</button>
+            <Link to="/questions" className="block">
+              <button className="w-full btn-primary text-white font-semibold py-3 text-base">Manage Questions</button>
+            </Link>
           </div>
 
           <div className="glass-card rounded-2xl p-6">
             <h4 className="text-lg font-semibold mb-2">Session Builder</h4>
             <p className="text-foreground/60 mb-4">Assemble playlists, set timings and live options.</p>
-            <button className="w-full bg-gray-600/50 text-gray-300 py-3 text-base cursor-not-allowed" disabled>Create Session</button>
+            <Link to="/sessions" className="block">
+              <button className="w-full btn-primary text-white font-semibold py-3 text-base">Create Session</button>
+            </Link>
           </div>
         </div>
       </div>
