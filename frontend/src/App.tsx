@@ -8,6 +8,44 @@ import { GamepadIcon, HelpCircle, Trophy, BarChart3, Settings, Users } from 'luc
 import './App.css'
 import Container from '@/components/ui/container';
 import Dashboard from '@/components/Dashboard';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Placeholder components for missing routes
+function QuestionsPlaceholder() {
+  return (
+    <Container maxWidth="7xl" className="py-8">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Questions Management</h1>
+        <p className="text-muted-foreground">Questions management functionality coming soon...</p>
+      </div>
+    </Container>
+  );
+}
+
+function PlayersPlaceholder() {
+  return (
+    <Container maxWidth="7xl" className="py-8">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Players Management</h1>
+        <p className="text-muted-foreground">Players management functionality coming soon...</p>
+      </div>
+    </Container>
+  );
+}
+
+function NotFound() {
+  return (
+    <Container maxWidth="7xl" className="py-8">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">404 - Page Not Found</h1>
+        <p className="text-muted-foreground mb-6">The page you're looking for doesn't exist.</p>
+        <Link to="/" className="btn-primary">
+          Go to Dashboard
+        </Link>
+      </div>
+    </Container>
+  );
+}
 
 /**
  * Home element renders the Dashboard component
@@ -116,7 +154,13 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <Home /> },
         { path: 'games', element: <Games /> },
+        { path: 'questions', element: <QuestionsPlaceholder /> },
+        { path: 'players', element: <PlayersPlaceholder /> },
       ],
+    },
+    {
+      path: '*',
+      element: <NotFound />,
     },
   ],
   {
@@ -127,5 +171,9 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
 }

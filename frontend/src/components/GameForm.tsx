@@ -112,7 +112,7 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
         response = await gameApi.create(gameData as Omit<Game, 'id' | 'createdAt' | 'updatedAt'>);
       }
 
-      if (response.success && onSubmit) {
+      if (response.success && response.data && onSubmit) {
         onSubmit(response.data);
       }
     } catch (err) {
@@ -123,8 +123,8 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
   };
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader className="pb-4">
+    <div className="glass-card rounded-2xl p-8">
+      <div className="space-y-6">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
@@ -136,17 +136,22 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
             Back to Games
           </Button>
         </div>
-        <CardTitle className="text-xl">
-          {game ? 'Edit Game' : 'Create New Game'}
-        </CardTitle>
-        <p className="text-sm text-muted-foreground">
-          {game ? 'Update the game configuration' : 'Configure a new House of Games format'}
-        </p>
-      </CardHeader>
-      <CardContent>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold text-foreground">
+            {game ? 'Edit Game' : 'Create New Game'}
+          </h2>
+          <p className="text-sm text-foreground/70">
+            {game ? 'Update the game configuration' : 'Configure a new House of Games format'}
+          </p>
+        </div>
         {error && (
-          <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-3 mb-6">
-            <p className="text-sm text-destructive">{error}</p>
+          <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4 mb-6">
+            <div className="flex items-center gap-2">
+              <div className="h-5 w-5 rounded-full bg-red-500/20 flex items-center justify-center">
+                <div className="h-2 w-2 rounded-full bg-red-400"></div>
+              </div>
+              <p className="text-sm text-red-400 font-medium">{error}</p>
+            </div>
           </div>
         )}
         
@@ -156,12 +161,16 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Game Name *</FormLabel>
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-sm font-medium text-foreground">Game Name *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter game name..." {...field} />
+                    <Input
+                      placeholder="Enter game name..."
+                      {...field}
+                      className="bg-slate-800/40 border-slate-700/50 text-foreground placeholder:text-slate-500"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-400" />
                 </FormItem>
               )}
             />
@@ -170,29 +179,29 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="type"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Game Type *</FormLabel>
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-sm font-medium text-foreground">Game Type *</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-slate-800/40 border-slate-700/50 text-foreground">
                         <SelectValue placeholder="Select a game type..." />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-slate-800/90 border-slate-700/50 backdrop-blur-sm">
                       {gameTypes.map((type) => (
-                        <SelectItem key={type.value} value={type.value}>
+                        <SelectItem key={type.value} value={type.value} className="text-foreground hover:bg-slate-700/50">
                           <div className="space-y-1">
-                            <div className="font-medium">{type.label}</div>
-                            <div className="text-xs text-muted-foreground">{type.description}</div>
+                            <div className="font-medium text-foreground">{type.label}</div>
+                            <div className="text-xs text-slate-400">{type.description}</div>
                           </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription>
+                  <FormDescription className="text-xs text-slate-400">
                     {form.watch('type') && gameTypes.find(t => t.value === form.watch('type'))?.description}
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-400" />
                 </FormItem>
               )}
             />
@@ -201,16 +210,17 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-sm font-medium text-foreground">Description</FormLabel>
                   <FormControl>
-                    <Textarea 
+                    <Textarea
                       placeholder="Optional description of this game..."
                       rows={3}
-                      {...field} 
+                      {...field}
+                      className="bg-slate-800/40 border-slate-700/50 text-foreground placeholder:text-slate-500 resize-none"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-400" />
                 </FormItem>
               )}
             />
@@ -219,16 +229,17 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="rules"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Rules</FormLabel>
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-sm font-medium text-foreground">Rules</FormLabel>
                   <FormControl>
-                    <Textarea 
+                    <Textarea
                       placeholder="Optional rules and instructions..."
                       rows={4}
-                      {...field} 
+                      {...field}
+                      className="bg-slate-800/40 border-slate-700/50 text-foreground placeholder:text-slate-500 resize-none"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-400" />
                 </FormItem>
               )}
             />
@@ -237,28 +248,28 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="round"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Round Number</FormLabel>
-                  <Select onValueChange={(value) => field.onChange(value ? Number(value) : undefined)} 
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-sm font-medium text-foreground">Round Number</FormLabel>
+                  <Select onValueChange={(value) => field.onChange(value ? Number(value) : undefined)}
                           defaultValue={field.value?.toString()}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-slate-800/40 border-slate-700/50 text-foreground">
                         <SelectValue placeholder="Select round (optional)..." />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="">No round specified</SelectItem>
-                      <SelectItem value="1">Round 1</SelectItem>
-                      <SelectItem value="2">Round 2</SelectItem>
-                      <SelectItem value="3">Round 3</SelectItem>
-                      <SelectItem value="4">Round 4</SelectItem>
-                      <SelectItem value="5">Round 5</SelectItem>
+                    <SelectContent className="bg-slate-800/90 border-slate-700/50 backdrop-blur-sm">
+                      <SelectItem value="null" className="text-foreground hover:bg-slate-700/50">No round specified</SelectItem>
+                      <SelectItem value="1" className="text-foreground hover:bg-slate-700/50">Round 1</SelectItem>
+                      <SelectItem value="2" className="text-foreground hover:bg-slate-700/50">Round 2</SelectItem>
+                      <SelectItem value="3" className="text-foreground hover:bg-slate-700/50">Round 3</SelectItem>
+                      <SelectItem value="4" className="text-foreground hover:bg-slate-700/50">Round 4</SelectItem>
+                      <SelectItem value="5" className="text-foreground hover:bg-slate-700/50">Round 5</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormDescription>
+                  <FormDescription className="text-xs text-slate-400">
                     Leave empty if this game can be used in any round
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-400" />
                 </FormItem>
               )}
             />
@@ -267,10 +278,10 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
               control={form.control}
               name="isActive"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Active Game</FormLabel>
-                    <FormDescription>
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border border-slate-700/50 p-4 bg-slate-800/20">
+                  <div className="space-y-1">
+                    <FormLabel className="text-sm font-medium text-foreground">Active Game</FormLabel>
+                    <FormDescription className="text-xs text-slate-400">
                       Only active games will be available for quiz sessions
                     </FormDescription>
                   </div>
@@ -278,24 +289,25 @@ export default function GameForm({ game, onSubmit, onCancel }: GameFormProps) {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      className="data-[state=checked]:bg-blue-500 data-[state=unchecked]:bg-slate-600"
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
 
-            <div className="flex gap-3 pt-4">
-              <Button type="submit" disabled={loading} className="gap-2">
+            <div className="flex gap-3 pt-6">
+              <Button type="submit" disabled={loading} className="gap-2 btn-primary">
                 <Save className="h-4 w-4" />
                 {loading ? 'Saving...' : (game ? 'Update Game' : 'Create Game')}
               </Button>
-              <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
+              <Button type="button" variant="outline" onClick={onCancel} disabled={loading} className="h-10">
                 Cancel
               </Button>
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

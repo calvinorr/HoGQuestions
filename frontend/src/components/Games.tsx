@@ -35,17 +35,22 @@ export default function Games() {
   };
 
   return (
-    <Container maxWidth="5xl" className="py-8">
+    <Container maxWidth="7xl" className="py-8">
       <div className="space-y-8">
         {/* Page Header */}
-        <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
-              Game Management
-            </h1>
-            <p className="text-slate-400 text-lg">
-              Configure and manage all 22 House of Games formats
-            </p>
+        <div className="glass-card rounded-2xl p-8">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-1 heading-gradient">
+                Game Management
+              </h1>
+              <p className="text-sm text-foreground/70">
+                Configure and manage all 22 House of Games formats
+              </p>
+            </div>
+            <div className="px-4 py-2 bg-blue-500/20 text-blue-300 border-blue-500/30 font-semibold rounded-md">
+              22 Types
+            </div>
           </div>
         </div>
 

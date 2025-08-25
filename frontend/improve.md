@@ -1,4 +1,4 @@
-# Dashboard Frontend Improvements
+ # Dashboard Frontend Improvements
 
 ## Overview
 This document outlines suggested improvements for the House of Games dashboard frontend based on the code review. The suggestions are categorized by priority and impact area.

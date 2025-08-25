@@ -1,6 +1,6 @@
 import type { Game, Question, QuizSession, ApiResponse, PaginatedResponse } from '../types';
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 class ApiError extends Error {
   public status?: number;
@@ -13,62 +13,132 @@ class ApiError extends Error {
 }
 
 async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    });
+  const maxRetries = 3;
+  let retryCount = 0;
 
-    if (!response.ok) {
-      throw new ApiError(`HTTP error! status: ${response.status}`, response.status);
-    }
+  while (retryCount < maxRetries) {
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        ...options,
+      });
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    if (error instanceof ApiError) {
-      throw error;
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new ApiError('Resource not found', 404);
+        }
+        if (response.status === 500) {
+          throw new ApiError('Server error', 500);
+        }
+        throw new ApiError(`HTTP error! status: ${response.status}`, response.status);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      retryCount++;
+      if (error instanceof ApiError) {
+        if (error.status === 404 || retryCount >= maxRetries) {
+          throw error;
+        }
+      } else if (retryCount >= maxRetries) {
+        throw new ApiError('Network error occurred');
+      }
+      // Wait before retrying
+      await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
     }
-    throw new ApiError('Network error occurred');
   }
+
+  throw new ApiError('Max retries exceeded');
 }
+
+// Health check function
+export const healthApi = {
+  check: async () => {
+    try {
+      const data = await fetchApi<{ status: string; timestamp: string }>('/health');
+      return { data, success: true };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Health check failed' };
+    }
+  },
+};
 
 // Game API functions
 export const gameApi = {
   getAll: async () => {
-    const data = await fetchApi<Game[]>('/games');
-    return { data, success: true };
+    try {
+      const data = await fetchApi<Game[]>('/games');
+      return { data, success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to fetch games',
+        data: []
+      };
+    }
   },
   
   getById: async (id: string) => {
-    const data = await fetchApi<Game>(`/games/${id}`);
-    return { data, success: true };
+    try {
+      const data = await fetchApi<Game>(`/games/${id}`);
+      return { data, success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to fetch game',
+        data: null
+      };
+    }
   },
   
   create: async (gameData: Omit<Game, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const data = await fetchApi<Game>('/games', {
-      method: 'POST',
-      body: JSON.stringify(gameData),
-    });
-    return { data, success: true };
+    try {
+      const data = await fetchApi<Game>('/games', {
+        method: 'POST',
+        body: JSON.stringify(gameData),
+      });
+      return { data, success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to create game',
+        data: null
+      };
+    }
   },
   
   update: async (id: string, gameData: Partial<Game>) => {
-    const data = await fetchApi<Game>(`/games/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(gameData),
-    });
-    return { data, success: true };
+    try {
+      const data = await fetchApi<Game>(`/games/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(gameData),
+      });
+      return { data, success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to update game',
+        data: null
+      };
+    }
   },
   
   delete: async (id: string) => {
-    await fetchApi<void>(`/games/${id}`, {
-      method: 'DELETE',
-    });
-    return { success: true };
+    try {
+      await fetchApi<void>(`/games/${id}`, {
+        method: 'DELETE',
+      });
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to delete game'
+      };
+    }
   },
 };
 
