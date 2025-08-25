@@ -217,6 +217,51 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
   }
+
+  /* Card variants */
+  .card--compact {
+    padding: 0.75rem; /* 12px */
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .card--elevated {
+    border: none;
+    box-shadow: 0 10px 30px -8px rgba(2,6,23,0.6), 0 6px 12px -6px rgba(2,6,23,0.4);
+  }
+
+  /* Badge semantic variants */
+  .badge--default {
+    background: rgb(var(--color-primary) / 0.12);
+    color: rgb(var(--color-primary-foreground) / 1);
+    border: 1px solid rgb(var(--color-primary) / 0.18);
+  }
+
+  .badge--secondary {
+    background: rgb(var(--color-secondary) / 0.08);
+    color: rgb(var(--color-secondary-foreground) / 1);
+    border: 1px solid rgb(var(--color-secondary) / 0.12);
+  }
+
+  .badge--outline {
+    background: transparent;
+    color: rgb(var(--color-foreground) / 1);
+    border: 1px solid rgb(var(--color-border) / 0.12);
+  }
+
+  /* Table row focus behavior to reveal actions for keyboard users */
+  .table-row-focus:focus-within .row-actions,
+  .table-row-focus:focus .row-actions {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Small utility: constrained cards inside lists to avoid full-width stretching */
+  .card-constrain {
+    max-width: 44rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @layer utilities {
