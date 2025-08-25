@@ -27,55 +27,55 @@ function LeftStats() {
   }, []);
 
   return (
-    <aside className="space-y-6">
-      <div className="rounded-2xl overflow-hidden glass-card p-4">
-        <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
+    <aside className="space-y-8">
+      <div className="rounded-2xl overflow-hidden glass-card p-6">
+        <h3 className="text-lg font-semibold mb-6">Quick Stats</h3>
 
         {isLoading ? (
-          <div className="space-y-4">
-            <div className="rounded-xl p-4 card-gradient-blue">
-              <div className="skeleton-text mb-2" />
+          <div className="space-y-6">
+            <div className="rounded-xl p-5 card-gradient-blue">
+              <div className="skeleton-text mb-3" />
               <div className="skeleton-stat" />
             </div>
-            <div className="rounded-xl p-4 card-gradient-green">
-              <div className="skeleton-text mb-2" />
+            <div className="rounded-xl p-5 card-gradient-green">
+              <div className="skeleton-text mb-3" />
               <div className="skeleton-stat" />
             </div>
-            <div className="rounded-xl p-4 card-gradient-purple">
-              <div className="skeleton-text mb-2" />
+            <div className="rounded-xl p-5 card-gradient-purple">
+              <div className="skeleton-text mb-3" />
               <div className="skeleton-stat" />
             </div>
-            <div className="rounded-xl p-4 card-gradient-orange">
-              <div className="skeleton-text mb-2" />
+            <div className="rounded-xl p-5 card-gradient-orange">
+              <div className="skeleton-text mb-3" />
               <div className="skeleton-stat" />
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
-            <div className="rounded-xl p-4 card-gradient-blue stat-tile enhanced-focus">
-              <p className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Total Games</p>
+          <div className="space-y-6">
+            <div className="rounded-xl p-5 card-gradient-blue stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-3">Total Games</p>
               <p className="stat-number text-3xl font-extrabold text-blue-100">22</p>
             </div>
 
-            <div className="rounded-xl p-4 card-gradient-green stat-tile enhanced-focus">
-              <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-2">Questions</p>
+            <div className="rounded-xl p-5 card-gradient-green stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-3">Questions</p>
               <p className="stat-number text-3xl font-extrabold text-emerald-100">156</p>
             </div>
 
-            <div className="rounded-xl p-4 card-gradient-purple stat-tile enhanced-focus">
-              <p className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-2">Quiz Sessions</p>
+            <div className="rounded-xl p-5 card-gradient-purple stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-3">Quiz Sessions</p>
               <p className="stat-number text-3xl font-extrabold text-purple-100">12</p>
             </div>
 
-            <div className="rounded-xl p-4 card-gradient-orange stat-tile enhanced-focus">
-              <p className="text-xs font-semibold text-orange-300 uppercase tracking-wider mb-2">Active Players</p>
+            <div className="rounded-xl p-5 card-gradient-orange stat-tile enhanced-focus">
+              <p className="text-xs font-semibold text-orange-300 uppercase tracking-wider mb-3">Active Players</p>
               <p className="stat-number text-3xl font-extrabold text-orange-100">48</p>
             </div>
           </div>
         )}
       </div>
 
-      <div className="rounded-2xl glass-card p-4">
+      <div className="rounded-2xl glass-card p-6">
         <p className="text-sm text-foreground/70">© 2025 House of Games — Admin Interface</p>
       </div>
     </aside>
@@ -193,17 +193,17 @@ function RightPanel() {
   }, []);
 
   return (
-    <aside className="space-y-6">
-      <div className="glass-card rounded-2xl p-4">
-        <h4 className="font-semibold mb-3">Activity</h4>
+    <aside className="space-y-8">
+      <div className="glass-card rounded-2xl p-6">
+        <h4 className="font-semibold mb-4">Activity</h4>
         {isLoading ? (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="skeleton-text" />
             <div className="skeleton-text" />
             <div className="skeleton-text" />
           </div>
         ) : (
-          <ul className="text-foreground/70 list-disc pl-4 space-y-2">
+          <ul className="text-foreground/70 list-disc pl-4 space-y-3">
             <li>New question added: Rhyme Time — <span className="text-foreground">Rhyme Round</span></li>
             <li>Player joined: 7 new</li>
             <li>Session scheduled: Quiz Night — 19:00</li>
@@ -211,31 +211,31 @@ function RightPanel() {
         )}
       </div>
 
-      <div className="glass-card rounded-2xl p-4">
-        <h5 className="font-semibold mb-2">Recent Sessions</h5>
+      <div className="glass-card rounded-2xl p-6">
+        <h5 className="font-semibold mb-3">Recent Sessions</h5>
         {isLoading ? (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="skeleton-text" />
             <div className="skeleton-text" />
           </div>
         ) : (
-          <div className="rounded-md bg-slate-800/40 p-3">
+          <div className="rounded-md bg-slate-800/40 p-4">
             <div className="text-sm">12 Aug · Pub Quiz</div>
-            <div className="text-sm text-foreground/60 mt-2">11 Aug · Kids Special</div>
+            <div className="text-sm text-foreground/60 mt-3">11 Aug · Kids Special</div>
           </div>
         )}
       </div>
 
-      <div className="glass-card rounded-2xl p-4">
-        <h5 className="font-semibold mb-2">Shortcuts</h5>
+      <div className="glass-card rounded-2xl p-6">
+        <h5 className="font-semibold mb-3">Shortcuts</h5>
         {isLoading ? (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="skeleton-text" />
             <div className="skeleton-text" />
             <div className="skeleton-text" />
           </div>
         ) : (
-          <ul className="text-foreground/70 space-y-1">
+          <ul className="text-foreground/70 space-y-2">
             <li className="text-blue-300 enhanced-focus">+ Create Session</li>
             <li className="text-blue-300 enhanced-focus">+ Add Question</li>
             <li className="text-blue-300 enhanced-focus">Player Inbox</li>
