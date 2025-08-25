@@ -50,3 +50,11 @@ backend/prisma/migrations/
 # Temporary files
 .tmp/
 temp/
+
+# Screenshots and local development files
+MyScreenshots/
+screenshots/
+*.png
+*.jpg
+*.jpeg
+*.gif
